@@ -10,7 +10,7 @@ const COLORS = {
   PINK:       '#E6B8C2',  // 1-27 done, 28 & 29 pending/empty
   ORANGE:     '#F4B942',  // 1-13 done, 14 in process or empty
   CREAM:      '#FFF2CC',  // Step 7/8/9 in process
-  BROWN:      '#481b34',  // Step 3 in progress
+  BROWN:      '#76ff14',  // Step 3 in progress
   WHITE:      '#FFFFFF',  // Default
 };
 
