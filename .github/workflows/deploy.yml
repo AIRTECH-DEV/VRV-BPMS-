@@ -1,0 +1,31 @@
+name: Auto Deploy to Apps Script
+
+on:
+  push:
+    branches:
+      - main          # fires when V1 merges into main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install clasp
+        run: npm install -g @google/clasp
+
+      - name: Inject Google credentials
+        run: echo '${{ secrets.CLASPRC_JSON }}' > ~/.clasprc.json
+
+      - name: Push code to Apps Script
+        run: clasp push --force
+
+      - name: Create New Deployment (goes Live)
+        run: clasp deploy --description "Auto deploy from main - ${{ github.sha }}"
