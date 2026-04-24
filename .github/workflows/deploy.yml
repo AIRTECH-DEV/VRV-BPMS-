@@ -1,9 +1,9 @@
-name: Auto Deploy to Apps Script
+name: Final Apps Script
 
 on:
   push:
     branches:
-      - main          # fires when V1 merges into main
+      - main
 
 jobs:
   deploy:
@@ -27,5 +27,6 @@ jobs:
       - name: Push code to Apps Script
         run: clasp push --force
 
-      - name: Create New Deployment (goes Live)
-        run: clasp deploy --description "Auto deploy from main - ${{ github.sha }}"
+      # ✅ Updates the SAME deployment = URL never changes
+      - name: Update Existing Deployment
+        run: clasp deploy -i ${{ secrets.CLASP_DEPLOYMENT_ID }} --description "Updated - ${{ github.sha }}"
